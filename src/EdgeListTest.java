@@ -17,7 +17,8 @@ import graph.impl.EdgeListGraph;
  * methods that a graph implementation contains.
  */
 public class EdgeListTest {
-   public static void main( String[] args ) throws Exception {
+   @SuppressWarnings("unused")
+public static void main( String[] args ) throws Exception {
       IGraph<String,Integer> g = new EdgeListGraph<String,Integer>();
       // create some vertices
       IVertex<String> hnl = g.insertVertex( "HNL" );
