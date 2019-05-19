@@ -243,7 +243,7 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 //		System.out.println(edge.element);
 		adjacencyMatrix[vam.index][wam.index] = edge;
 		adjacencyMatrix[wam.index][vam.index] = edge;
-		
+
 		// insert into the edge list and store the reference to the node
 		// in the edge object
 		INode<IEdge<E>> n = edges.insertLast(edge);
@@ -254,13 +254,14 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 	@Override
 	public V removeVertex(IVertex<V> v) {
 		// first find all incident edges and remove those
-		IList<IEdge<E>> incidentEdges = new DLinkedList<IEdge<E>>();
-		IIterator<IEdge<E>> it = incidentEdges(v);
-		while( it.hasNext() )
-			incidentEdges.insertLast(it.next());
-		
-		while (!incidentEdges.isEmpty())
-			removeEdge(incidentEdges.remove(incidentEdges.first()));
+		IIterator<IEdge<E>> ed = edges();
+		while (ed.hasNext()) {
+			IEdge<E> e = ed.next();
+			IVertex<V>[] iv = endVertices(e);
+			if(iv[0].element()==v.element()||iv[1].element()==v.element()) {
+				removeEdge(e);
+			}
+		}
 
 		// now we can remove the vertex from the vertex list
 		AdjacencyMatrixVertex vertex = (AdjacencyMatrixVertex) v;
@@ -299,6 +300,8 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 		adjacencyMatrix[((AdjacencyMatrixVertex) temp[1]).index()][((AdjacencyMatrixVertex) temp[0]).index()] = null;
 		AdjacencyMatrixEdge edge = (AdjacencyMatrixEdge) e;
 		edges.remove(edge.node);
+		edge.start=null;
+		edge.end=null;
 		return edge.element;
 	}
 
@@ -317,7 +320,7 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 			if(edge!=null) {
 				if (edge.start.equals(v))
 					list.insertLast(edge);
-				if (edge.end.equals(v))
+				else if (edge.end.equals(v))
 					list.insertLast(edge);
 			}
 			i++;
