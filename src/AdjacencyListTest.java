@@ -101,11 +101,25 @@ public class AdjacencyListTest {
 	     }
 		  
 	     //test: removeVertex() in AdjacencyListGraph
+	     String save = dfw.element();
 	     g.removeVertex(dfw);
-	     if ( g.areAdjacent( dfw,  lax ) ) {
-	    	 System.out.println( "DFW and LAX not adjacent: incorrect" ); 
-	     }else {
-	      System.out.println( "DFW and LAX not adjacent: correct" );
+	     IIterator<IVertex<String>> i=g.vertices();
+	     while ( i.hasNext()) {
+	    	 IVertex<String> s = i.next();
+	    	 if(g.areAdjacent( dfw, s  ) ) {
+	    	 System.out.println( "DFW and "+s.element()+" not adjacent: incorrect" ); 
+	    	 }else {
+	    		 System.out.println( "DFW and "+s.element()+" LAX not adjacent: correct" );
+	    	 }
+	     }
+	     IIterator<IEdge<Integer>> j=g.edges();
+	     while ( j.hasNext()) {
+	    	 IEdge<Integer> s = j.next();
+	    	 IVertex<String>[] e = g.endVertices(s);
+	    	 if(e[0].element()==save || e[1].element()==save) {
+	    		 System.out.println("Remove error in edge "+e[0].element()+e[1].element());
+	    		 break;
+	    	 }
 	     }
 		
 	}
