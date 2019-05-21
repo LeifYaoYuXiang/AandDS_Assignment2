@@ -79,6 +79,11 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 	//AdjacencyMatrix
 	@SuppressWarnings("unchecked")
 	private IEdge<E>[][] adjacencyMatrix = new IEdge[0][0];
+	
+	public IEdge<E>[][] getMatrix() {
+		return adjacencyMatrix;
+	}
+	
 	// vertex list
 	private IList<IVertex<V>> vertices;
 
@@ -191,9 +196,11 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 		int i = 0;
 		int j = 0;
 		while(i<size-1) {
+			j = 0;
 			while(j<size-1) {
-				if(i<p && j<p)
+				if(i<p && j<p) {
 					newam[i][j] = adjacencyMatrix[i][j];
+				}
 				else if(i<p && j>=p) 
 					newam[i][j] = adjacencyMatrix[i][j+1];
 				else if(i>=p && j<p)
