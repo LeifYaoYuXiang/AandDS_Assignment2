@@ -130,6 +130,7 @@ public class AdjacencyMatrixTest {
 	     String save = dfw.element();
 	     g.removeVertex(dfw);
 	     IIterator<IVertex<String>> i=g.vertices();
+	     System.out.println("-------------------------------------------------------");
 	     
 	   //test:matrix
 		    printMatrix(((AdjacencyMatrixGraph<String, Integer>) g).getMatrix(),g);
