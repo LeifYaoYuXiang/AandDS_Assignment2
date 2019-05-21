@@ -5,10 +5,34 @@ import graph.core.IVertex;
 import graph.impl.AdjacencyMatrixGraph;
 
 public class AdjacencyMatrixTest {
+	
+	//matrix test function
+	public static void printMatrix(IEdge<Integer>[][] am,IGraph<String,Integer> g) {
+		int i = 0;
+		int j = 0;
+		while(i<am.length) {
+			j = 0;
+			while(j<am.length) {
+				System.out.print("|");
+				if(am[j][i]!=null){
+					IVertex<String>[] iv = g.endVertices(am[j][i]);
+					System.out.printf("%3s",iv[0]);
+					System.out.printf("%3s",iv[1]);
+				}
+				else {
+					System.out.printf("%6s","");
+				}
+				j++;
+			}
+			System.out.print("|");
+			System.out.println("\n");
+			i++;
+		}
+	}
+	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
-			
 		// create some vertexes
 		//test: insertVertex() in AdjacencyMatrixGraph
 		IGraph<String,Integer> g=new AdjacencyMatrixGraph<String,Integer>();
@@ -33,6 +57,9 @@ public class AdjacencyMatrixTest {
 	    IEdge<Integer> dfwmia = g.insertEdge( dfw, mia, 1120 );
 	    IEdge<Integer> lgamia = g.insertEdge( lga, mia, 1099 );
 	    IEdge<Integer> lgapvd = g.insertEdge( lga, pvd, 142 );
+	    
+	    //test:matrix
+	    printMatrix(((AdjacencyMatrixGraph<String, Integer>) g).getMatrix(),g);
 	    
 	    //test: areAdjacent() in AdjacencyMatrixGraph
 	    if ( g.areAdjacent( sfo,  ord ) ) {
@@ -85,7 +112,7 @@ public class AdjacencyMatrixTest {
 	     System.out.println("The distance between HNL & LAX is "+ hnllax.element());
 	     
 	     //test: replace() in AdjacencyMatrixGraph--for vertexes
-	     g.replace(pvd, "New PVD");
+	     g.replace(pvd, "DVD");
 	     System.out.println("The new name of station PVD is "+pvd.element());
 	     
 	     //test: removeEdge() in AdjacencyMatrixGraph
@@ -95,11 +122,17 @@ public class AdjacencyMatrixTest {
 	     }else {
 	      System.out.println( "SFO and ORD not adjacent: correct" ); 
 	     }
+	     
+	   //test:matrix
+		    printMatrix(((AdjacencyMatrixGraph<String, Integer>) g).getMatrix(),g);
 		  
 	     //test: removeVertex() in AdjacencyMatrixGraph
 	     String save = dfw.element();
 	     g.removeVertex(dfw);
 	     IIterator<IVertex<String>> i=g.vertices();
+	     
+	   //test:matrix
+		    printMatrix(((AdjacencyMatrixGraph<String, Integer>) g).getMatrix(),g);
 	     
 	     //now test adjacency
 	     while ( i.hasNext()) {
