@@ -8,11 +8,6 @@ public class AdjacencyListTest {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
-		/*
-		 * Basic Test: Test some simple case
-		 * 
-		 * */
-			
 		// create some vertexes
 		//test: insertVertex() in AdjacencyListGraph
 		IGraph<String,Integer> g=new AdjacencyListGraph<String,Integer>();
@@ -120,6 +115,24 @@ public class AdjacencyListTest {
 	    		 System.out.println("Remove error in edge "+e[0].element()+e[1].element());
 	    		 break;
 	    	 }
+	     }
+	     
+	     /*
+	      * First we test whether two isolated vertexes are linked together,
+	      * the output should be "They didn't link together"
+	      * Then we link these two vertexes, and test whether there is a link between them
+	      * */
+	     
+	     if(g.areAdjacent(mia, pvd)) {
+	    	 System.out.println("They are linked together");
+	     }else {
+	    	 System.out.println("They are not linked together");
+	     }
+	     g.insertEdge(mia, pvd, 125);
+	     if(g.areAdjacent(mia, pvd)) {
+	    	 System.out.println("They are linked together");
+	     }else {
+	    	 System.out.println("They are not linked together");
 	     }
 		
 	}

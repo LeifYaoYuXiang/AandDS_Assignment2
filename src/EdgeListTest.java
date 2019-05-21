@@ -3,19 +3,7 @@ import graph.core.IGraph;
 import graph.core.IIterator;
 import graph.core.IVertex;
 import graph.impl.EdgeListGraph;
-/**
- * This is a file that contains some code to create a 
- * graph and test some of its methods.
- *
- * The graph is the graph of airports and the distances
- * between them that we have seen in the lectures.
- * 
- * This is an example of testing some of the methods
- * of the edge list graph implementation. 
- * 
- * You should add some more tests to test the other
- * methods that a graph implementation contains.
- */
+
 public class EdgeListTest {
    @SuppressWarnings("unused")
 public static void main( String[] args ) throws Exception {

@@ -8,10 +8,6 @@ public class AdjacencyMatrixTest {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
-		/*
-		 * Basic Test: Test some simple case
-		 * 
-		 * */
 			
 		// create some vertexes
 		//test: insertVertex() in AdjacencyMatrixGraph
