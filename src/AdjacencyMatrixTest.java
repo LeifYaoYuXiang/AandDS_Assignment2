@@ -102,7 +102,6 @@ public class AdjacencyMatrixTest {
 	     //test: vertices() in AdjacencyMatrixGraph
 	     IIterator<IVertex<String>> it = g.vertices();
 	     while( it.hasNext() ) {
-	         // here I must cast also, since it.next() returns an Object
 	         IVertex<String> v = it.next();
 	         System.out.println( v.element() );
 	      }
@@ -129,19 +128,19 @@ public class AdjacencyMatrixTest {
 	     //test: removeVertex() in AdjacencyMatrixGraph
 	     String save = dfw.element();
 	     g.removeVertex(dfw);
-	     IIterator<IVertex<String>> i=g.vertices();
 	     System.out.println("-------------------------------------------------------");
 	     
 	   //test:matrix
 		    printMatrix(((AdjacencyMatrixGraph<String, Integer>) g).getMatrix(),g);
 	     
 	     //now test adjacency
+		 IIterator<IVertex<String>> i=g.vertices();
 	     while ( i.hasNext()) {
 	    	 IVertex<String> s = i.next();
 	    	 if(g.areAdjacent( dfw, s  ) ) {
 	    	 System.out.println( "DFW and "+s.element()+" not adjacent: incorrect" ); 
 	    	 }else {
-	    		 System.out.println( "DFW and "+s.element()+" LAX not adjacent: correct" );
+	    		 System.out.println( "DFW and "+s.element()+" not adjacent: correct" );
 	    	 }
 	     }
 	     
