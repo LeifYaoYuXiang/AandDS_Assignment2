@@ -134,8 +134,13 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 
 	@Override
 	public boolean areAdjacent(IVertex<V> v, IVertex<V> w) {
-		if(adjacencyMatrix[((AdjacencyMatrixVertex) v).index()][((AdjacencyMatrixVertex) w).index()]!=null) {
-			return true;
+		if(((AdjacencyMatrixVertex) v).index()>=0 && ((AdjacencyMatrixVertex) w).index()>=0) {
+			if(adjacencyMatrix[((AdjacencyMatrixVertex) v).index()][((AdjacencyMatrixVertex) w).index()]!=null) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
 			return false;
@@ -243,11 +248,6 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 		AdjacencyMatrixVertex vam = (AdjacencyMatrixVertex) v;
 		AdjacencyMatrixVertex wam = (AdjacencyMatrixVertex) w;
 		AdjacencyMatrixEdge edge = new AdjacencyMatrixEdge(vam, wam, o);
-//		System.out.println(vam.element);
-//		System.out.println(vam.index);
-//		System.out.println(wam.element);
-//		System.out.println(wam.index);
-//		System.out.println(edge.element);
 		adjacencyMatrix[vam.index][wam.index] = edge;
 		adjacencyMatrix[wam.index][vam.index] = edge;
 
@@ -273,26 +273,23 @@ public class AdjacencyMatrixGraph<V,E> implements IGraph<V,E> {
 		// now we can remove the vertex from the vertex list
 		AdjacencyMatrixVertex vertex = (AdjacencyMatrixVertex) v;
 		int temp = vertex.index;
-		//System.out.println(temp);
 		vertices.remove(vertex.node);
 		
 		//resize the adjacency matrix
 		adjacencyMatrix = resize(temp);
 		
 		//change indices of vertices
+		vertex.index = -1;
 		 IIterator<IVertex<V>> t = vertices.iterator();
 		 IVertex<V> a = t.next();
 	      while( t.hasNext() && ((AdjacencyMatrixVertex) a).index()<temp) {
-	    	  //((AdjacencyMatrixVertex) a).printIndex();
 	    	  a = t.next();
 	      }
 	      while(t.hasNext()) {
 	    	  ((AdjacencyMatrixVertex) a).index--;
-	    	 // ((AdjacencyMatrixVertex) a).printIndex();
 	    	  a = t.next();
 	      }
 	      ((AdjacencyMatrixVertex) a).index--;
-    	  //((AdjacencyMatrixVertex) a).printIndex();
 
 		// return the element of the vertex that was removed
 		return vertex.element;
